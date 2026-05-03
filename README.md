@@ -66,7 +66,7 @@ parallax/
 │   ├── knowledge_graph/ # Graph construction
 │   ├── xai/             # All explainability modules
 │   ├── analysis/        # Gap analysis, bias, confidence
-│   └── app/             # Streamlit dashboard
+│   └── app/             # dashboard
 ├── tests/
 ├── notebooks/
 └── docs/                # Technical documentation
@@ -93,4 +93,3 @@ streamlit run src/app/streamlit_app.py
 | TBD  | TBD  | TBD   |
 
 **Company:** EY — AI Explainability Challenge  
-**Course:** Artificial Intelligence Techniques — LUISS 2025/2026
