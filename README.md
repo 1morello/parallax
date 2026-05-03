@@ -1,4 +1,4 @@
-# ◈ PARALLAX
+# PARALLAX
 
 **An AI system that matches municipal development plans with EU funding opportunities, featuring multi-perspective explainability (XAI), gap analysis, and bias-aware recommendations.**
 
