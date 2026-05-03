@@ -1,0 +1,40 @@
+# PARALLAX — Multi-perspective AI for EU Grant Matching
+# Python 3.10+
+
+# ── Core NLP & ML ──────────────────────────────────────
+sentence-transformers==3.3.1
+transformers==4.46.3
+torch==2.5.1
+scikit-learn==1.5.2
+
+# ── Data Handling ──────────────────────────────────────
+numpy==1.26.4
+pandas==2.2.3
+
+# ── Knowledge Graph ───────────────────────────────────
+networkx==3.4.2
+
+# ── XAI ───────────────────────────────────────────────
+shap==0.46.0
+lime==0.2.0.1
+
+# ── LLM / RAG ────────────────────────────────────────
+openai==1.54.5           # for RAG explanations (optional, can swap)
+
+# ── Visualization ─────────────────────────────────────
+matplotlib==3.9.2
+seaborn==0.13.2
+plotly==5.24.1
+pyvis==0.3.2             # interactive graph visualization
+
+# ── Web App ───────────────────────────────────────────
+streamlit==1.40.1
+
+# ── Text Processing ───────────────────────────────────
+nltk==3.9.1
+spacy==3.8.2
+
+# ── Utilities ─────────────────────────────────────────
+tqdm==4.67.0
+python-dotenv==1.0.1
+pyyaml==6.0.2
