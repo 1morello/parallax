@@ -1,89 +1,35 @@
-# PARALLAX
+# parallax
 
-**An AI system that matches municipal development plans with EU funding opportunities, featuring multi-perspective explainability (XAI), gap analysis, and bias-aware recommendations.**
+## About
 
-> *Parallax*: a shift in perspective reveals what was always there.  
-> The same AI decision, explained from three viewpoints: citizen, analyst, auditor.
+European municipalities have access to billions in EU funding but lack the resources to navigate hundreds of grant programmes. Parallax matches a city's development plan against available grants using semantic search, then explains each match through SHAP/LIME, counterfactual analysis, and LLM-generated narratives — tailored to three audience levels (citizen, analyst, auditor).
 
----
-
-## What is this?
-
-EU municipalities have access to billions in funding, but the landscape is fragmented across hundreds of programmes. PARALLAX finds the right grants for a city's development plan — and explains *why* each one fits, from multiple perspectives.
-
-## Architecture
-
-```
-Municipal Plan (IT/EN)
-        │
-        ▼
-┌─────────────────────┐
-│  Text Preprocessing  │
-│  & Summarization     │
-└────────┬────────────┘
-         │
-         ▼
-┌─────────────────────┐     ┌──────────────────┐
-│  Multilingual        │────▶│  Grant Database   │
-│  Semantic Retrieval  │     │  (embeddings)     │
-└────────┬────────────┘     └──────────────────┘
-         │
-         ▼
-┌─────────────────────┐
-│  Knowledge Graph     │
-│  Enrichment          │
-└────────┬────────────┘
-         │
-    ┌────┴─────┬──────────────┬────────────────┐
-    ▼          ▼              ▼                ▼
-┌────────┐ ┌────────┐ ┌────────────┐ ┌──────────────┐
-│ SHAP/  │ │Counter-│ │    RAG     │ │     Gap      │
-│ LIME   │ │factual │ │ Narrative  │ │   Analysis   │
-└───┬────┘ └───┬────┘ └─────┬──────┘ └──────┬───────┘
-    └──────────┴─────────────┴───────────────┘
-                      │
-                      ▼
-         ┌────────────────────────┐
-         │   Streamlit Dashboard   │
-         │   (What-If Explorer)    │
-         └────────────────────────┘
-```
-
-## Project Structure
-
-```
-parallax/
-├── config/              # Configuration and constants
-├── data/
-│   ├── raw/             # Original grant & plan data
-│   ├── processed/       # Cleaned, embedded data
-│   └── knowledge_graph/ # Graph data
-├── src/
-│   ├── models.py        # Core data models
-│   ├── data_collection/ # Data loading
-│   ├── preprocessing/   # Text cleaning and chunking
-│   ├── retrieval/       # Embedding and semantic matching
-│   ├── knowledge_graph/ # Graph construction
-│   ├── xai/             # All explainability modules
-│   ├── analysis/        # Gap analysis, bias, confidence
-│   └── app/             # dashboard
-├── tests/
-├── notebooks/
-└── docs/                # Technical documentation
-```
-
-## Quick Start
+## Setup
 
 ```bash
 python -m venv .venv
 source .venv/bin/activate
 pip install -r requirements.txt
-streamlit run src/app/streamlit_app.py
 ```
-## Team
 
-| Name | Role | Email |
-|------|------|-------|
-| TBD  | TBD  | TBD   |
+## Usage
+
+Build embeddings and run matching:
+
+```bash
+python -m src.preprocessing.pipeline
+```
+
+Build knowledge graph:
+
+```bash
+python -m src.knowledge_graph.builder
+```
+
+Launch the app:
+
+```bash
+uvicorn src.app.api:app --reload
+```
 
 **Company:** EY — AI Explainability Challenge  
