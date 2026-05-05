@@ -2,7 +2,7 @@
 
 **An AI system that matches municipal development plans with EU funding opportunities, featuring multi-perspective explainability (XAI), gap analysis, and bias-aware recommendations.**
 
-> *Parallax* — a shift in perspective reveals what was always there.  
+> *Parallax*: a shift in perspective reveals what was always there.  
 > The same AI decision, explained from three viewpoints: citizen, analyst, auditor.
 
 ---
@@ -80,12 +80,6 @@ source .venv/bin/activate
 pip install -r requirements.txt
 streamlit run src/app/streamlit_app.py
 ```
-
-## Documentation
-
-- **[Technical Documentation (EN)](docs/TECH_DOC_EN.md)** — full system reference
-- **[Техническая документация (RU)](docs/TECH_DOC_RU.md)** — полный справочник
-
 ## Team
 
 | Name | Role | Email |
