@@ -33,6 +33,7 @@ uvicorn src.app.api:app --reload
 ```
 ## Project structure
 
+```
 src/
 ├── models.py             # data models
 ├── data_collection/      # data loading
@@ -42,6 +43,6 @@ src/
 ├── xai/                  # SHAP, LIME, counterfactual, RAG
 ├── analysis/             # gap analysis, bias detection, confidence
 └── app/                  # FastAPI + frontend
-
+```
 
 **Company:** EY — AI Explainability Challenge  
