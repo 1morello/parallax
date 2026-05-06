@@ -1,0 +1,163 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        
+            <script src="lib/bindings/utils.js"></script>
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/vis-network/9.1.2/dist/dist/vis-network.min.css" integrity="sha512-WgxfT5LWjfszlPHXRmBWHkV2eceiWTOBvrKCNbdgDYTHrT2AeLCGbF4sZlZw3UMN3WtL0tGUoIAKsu8mllg/XA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/vis-network/9.1.2/dist/vis-network.min.js" integrity="sha512-LnvoEWDFrqGHlHmDD2101OrLcbsfkrzoSpvtSQtxK3RMnRV0eOkhhBN2dXHKRrUU8p2DGRTk35n4O8nWSVe1mQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+            
+        
+<center>
+<h1></h1>
+</center>
+
+<!-- <link rel="stylesheet" href="../node_modules/vis/dist/vis.min.css" type="text/css" />
+<script type="text/javascript" src="../node_modules/vis/dist/vis.js"> </script>-->
+        <link
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6"
+          crossorigin="anonymous"
+        />
+        <script
+          src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
+          integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
+          crossorigin="anonymous"
+        ></script>
+
+
+        <center>
+          <h1></h1>
+        </center>
+        <style type="text/css">
+
+             #mynetwork {
+                 width: 100%;
+                 height: 600px;
+                 background-color: #1a1a2e;
+                 border: 1px solid lightgray;
+                 position: relative;
+                 float: left;
+             }
+
+             
+
+             
+
+             
+        </style>
+    </head>
+
+
+    <body>
+        <div class="card" style="width: 100%">
+            
+            
+            <div id="mynetwork" class="card-body"></div>
+        </div>
+
+        
+        
+
+        <script type="text/javascript">
+
+              // initialize global variables.
+              var edges;
+              var nodes;
+              var allNodes;
+              var allEdges;
+              var nodeColors;
+              var originalNodes;
+              var network;
+              var container;
+              var options, data;
+              var filter = {
+                  item : '',
+                  property : '',
+                  value : []
+              };
+
+              
+
+              
+
+              // This method is responsible for drawing the graph, returns the drawn network
+              function drawGraph() {
+                  var container = document.getElementById('mynetwork');
+
+                  
+
+                  // parsing and collecting nodes and edges from the python
+                  nodes = new vis.DataSet([{"color": "#4A90D9", "font": {"color": "white"}, "id": "plan-montescaglioso", "label": "Montescaglioso", "shape": "star", "size": 35, "title": "Montescaglioso \u2014 Basilicata"}, {"color": "#95A5A6", "font": {"color": "white"}, "id": "renewable_energy", "label": "Renewable Energy", "shape": "dot", "size": 12, "title": "\u2717 renewable_energy"}, {"color": "#2ECC71", "font": {"color": "white"}, "id": "energy_efficiency", "label": "Energy Efficiency", "shape": "dot", "size": 20, "title": "\u2713 energy_efficiency"}, {"color": "#95A5A6", "font": {"color": "white"}, "id": "sustainable_transport", "label": "Sustainable Transport", "shape": "dot", "size": 12, "title": "\u2717 sustainable_transport"}, {"color": "#2ECC71", "font": {"color": "white"}, "id": "digital_infrastructure", "label": "Digital Infrastructure", "shape": "dot", "size": 20, "title": "\u2713 digital_infrastructure"}, {"color": "#2ECC71", "font": {"color": "white"}, "id": "digital_skills", "label": "Digital Skills", "shape": "dot", "size": 20, "title": "\u2713 digital_skills"}, {"color": "#95A5A6", "font": {"color": "white"}, "id": "education", "label": "Education", "shape": "dot", "size": 12, "title": "\u2717 education"}, {"color": "#2ECC71", "font": {"color": "white"}, "id": "healthcare", "label": "Healthcare", "shape": "dot", "size": 20, "title": "\u2713 healthcare"}, {"color": "#95A5A6", "font": {"color": "white"}, "id": "social_inclusion", "label": "Social Inclusion", "shape": "dot", "size": 12, "title": "\u2717 social_inclusion"}, {"color": "#2ECC71", "font": {"color": "white"}, "id": "cultural_heritage", "label": "Cultural Heritage", "shape": "dot", "size": 20, "title": "\u2713 cultural_heritage"}, {"color": "#2ECC71", "font": {"color": "white"}, "id": "urban_regeneration", "label": "Urban Regeneration", "shape": "dot", "size": 20, "title": "\u2713 urban_regeneration"}, {"color": "#95A5A6", "font": {"color": "white"}, "id": "waste_management", "label": "Waste Management", "shape": "dot", "size": 12, "title": "\u2717 waste_management"}, {"color": "#95A5A6", "font": {"color": "white"}, "id": "water_management", "label": "Water Management", "shape": "dot", "size": 12, "title": "\u2717 water_management"}, {"color": "#95A5A6", "font": {"color": "white"}, "id": "biodiversity", "label": "Biodiversity", "shape": "dot", "size": 12, "title": "\u2717 biodiversity"}, {"color": "#95A5A6", "font": {"color": "white"}, "id": "climate_adaptation", "label": "Climate Adaptation", "shape": "dot", "size": 12, "title": "\u2717 climate_adaptation"}, {"color": "#2ECC71", "font": {"color": "white"}, "id": "agriculture", "label": "Agriculture", "shape": "dot", "size": 20, "title": "\u2713 agriculture"}, {"color": "#2ECC71", "font": {"color": "white"}, "id": "tourism", "label": "Tourism", "shape": "dot", "size": 20, "title": "\u2713 tourism"}, {"color": "#2ECC71", "font": {"color": "white"}, "id": "sme_support", "label": "Sme Support", "shape": "dot", "size": 20, "title": "\u2713 sme_support"}, {"color": "#95A5A6", "font": {"color": "white"}, "id": "research_innovation", "label": "Research Innovation", "shape": "dot", "size": 12, "title": "\u2717 research_innovation"}, {"color": "#95A5A6", "font": {"color": "white"}, "id": "public_administration", "label": "Public Administration", "shape": "dot", "size": 12, "title": "\u2717 public_administration"}, {"color": "#95A5A6", "font": {"color": "white"}, "id": "youth_employment", "label": "Youth Employment", "shape": "dot", "size": 12, "title": "\u2717 youth_employment"}, {"color": "#95A5A6", "font": {"color": "white"}, "id": "gender_equality", "label": "Gender Equality", "shape": "dot", "size": 12, "title": "\u2717 gender_equality"}, {"color": "#95A5A6", "font": {"color": "white"}, "id": "circular_economy", "label": "Circular Economy", "shape": "dot", "size": 12, "title": "\u2717 circular_economy"}, {"color": "#95A5A6", "font": {"color": "white"}, "id": "cybersecurity", "label": "Cybersecurity", "shape": "dot", "size": 12, "title": "\u2717 cybersecurity"}, {"color": "#95A5A6", "font": {"color": "white"}, "id": "housing", "label": "Housing", "shape": "dot", "size": 12, "title": "\u2717 housing"}, {"color": "#E67E22", "font": {"color": "white"}, "id": "LIFE-2026-CET-SOLAR", "label": "Solar Energy for Public Infras...", "shape": "diamond", "size": 18, "title": "Solar Energy for Public Infrastructure\nLIFE Clean Energy Transition\n\u20ac12,000,000"}, {"color": "#E67E22", "font": {"color": "white"}, "id": "ERDF-2026-IT-URBAN", "label": "Sustainable Urban Development ...", "shape": "diamond", "size": 18, "title": "Sustainable Urban Development in Italian Municipalities\nEuropean Regional Development Fund \u2014 Italy\n\u20ac120,000,000"}, {"color": "#E67E22", "font": {"color": "white"}, "id": "ESF-2026-YOUTH-EMPLOY", "label": "Youth Employment and Skills De...", "shape": "diamond", "size": 18, "title": "Youth Employment and Skills Development Pathways\nEuropean Social Fund Plus\n\u20ac35,000,000"}]);
+                  edges = new vis.DataSet([{"color": "#2ECC71", "from": "plan-montescaglioso", "to": "energy_efficiency", "width": 2}, {"color": "#2ECC71", "from": "plan-montescaglioso", "to": "digital_infrastructure", "width": 2}, {"color": "#2ECC71", "from": "plan-montescaglioso", "to": "digital_skills", "width": 2}, {"color": "#2ECC71", "from": "plan-montescaglioso", "to": "healthcare", "width": 2}, {"color": "#2ECC71", "from": "plan-montescaglioso", "to": "cultural_heritage", "width": 2}, {"color": "#2ECC71", "from": "plan-montescaglioso", "to": "urban_regeneration", "width": 2}, {"color": "#2ECC71", "from": "plan-montescaglioso", "to": "agriculture", "width": 2}, {"color": "#2ECC71", "from": "plan-montescaglioso", "to": "tourism", "width": 2}, {"color": "#2ECC71", "from": "plan-montescaglioso", "to": "sme_support", "width": 2}, {"color": "#E67E22", "from": "LIFE-2026-CET-SOLAR", "to": "energy_efficiency", "width": 1}, {"color": "#E67E22", "from": "LIFE-2026-CET-SOLAR", "to": "digital_infrastructure", "width": 1}, {"color": "#E67E22", "from": "ERDF-2026-IT-URBAN", "to": "urban_regeneration", "width": 1}, {"color": "#E67E22", "from": "ERDF-2026-IT-URBAN", "to": "energy_efficiency", "width": 1}, {"color": "#E67E22", "from": "ESF-2026-YOUTH-EMPLOY", "to": "digital_skills", "width": 1}]);
+
+                  nodeColors = {};
+                  allNodes = nodes.get({ returnType: "Object" });
+                  for (nodeId in allNodes) {
+                    nodeColors[nodeId] = allNodes[nodeId].color;
+                  }
+                  allEdges = edges.get({ returnType: "Object" });
+                  // adding nodes and edges to the graph
+                  data = {nodes: nodes, edges: edges};
+
+                  var options = {
+    "configure": {
+        "enabled": false
+    },
+    "edges": {
+        "color": {
+            "inherit": true
+        },
+        "smooth": {
+            "enabled": true,
+            "type": "dynamic"
+        }
+    },
+    "interaction": {
+        "dragNodes": true,
+        "hideEdgesOnDrag": false,
+        "hideNodesOnDrag": false
+    },
+    "physics": {
+        "barnesHut": {
+            "avoidOverlap": 0,
+            "centralGravity": 0.3,
+            "damping": 0.09,
+            "gravitationalConstant": -3000,
+            "springConstant": 0.001,
+            "springLength": 250
+        },
+        "enabled": true,
+        "stabilization": {
+            "enabled": true,
+            "fit": true,
+            "iterations": 1000,
+            "onlyDynamicEdges": false,
+            "updateInterval": 50
+        }
+    }
+};
+
+                  
+
+
+                  
+
+                  network = new vis.Network(container, data, options);
+
+                  
+
+                  
+
+                  
+
+
+                  
+
+                  return network;
+
+              }
+              drawGraph();
+        </script>
+    </body>
+</html>
