@@ -2,7 +2,7 @@
 
 ## About
 
-European municipalities have access to billions in EU funding but lack the resources to navigate hundreds of grant programmes. Parallax matches a city's development plan against available grants using semantic search, then explains each match through SHAP/LIME, counterfactual analysis, and LLM-generated narratives — tailored to three audience levels (citizen, analyst, auditor).
+European municipalities have access to billions in EU funding but lack the resources to navigate hundreds of grant programmes. Parallax matches a city's development plan against available grants using semantic search, then explains each match through SHAP/LIME, counterfactual analysis, and LLM-generated narratives: tailored to three audience levels (citizen, analyst, auditor).
 
 ## Setup
 
