@@ -17,10 +17,9 @@ rag = RagExplainer()
 
 
 def create_header():
-    with ui.header().classes("bg-dark"):
+    with ui.header().classes("bg-dark items-center"):
         ui.label("◈ PARALLAX").classes("text-xl font-bold")
-        ui.label("Municipal Plan ↔ EU Grant Matching").classes("text-sm opacity-70")
-
+        ui.label("Municipal Plan ↔ EU Grant Matching").classes("text-sm opacity-70 ml-4")
 
 def create_main_page():
     create_header()
@@ -43,10 +42,10 @@ def create_main_page():
         with results_container:
 
             # confidence summary
-            color = {"strong": "green", "moderate": "yellow", "ambiguous": "orange", "weak": "red"}.get(confidence["quality"], "gray")
+            color = {"strong": "green", "moderate": "amber", "ambiguous": "orange", "weak": "red"}.get(confidence["quality"], "gray")
             with ui.card().classes("w-full mb-4"):
                 ui.label("Result confidence").classes("text-lg font-bold")
-                ui.badge(confidence["quality"].upper(), color=color)
+                ui.badge(confidence["quality"].upper(), color=color, text_color="black")
                 ui.label(confidence["summary"]).classes("text-sm mt-1")
 
             # coverage bar
@@ -136,7 +135,7 @@ def create_main_page():
                         with ui.row().classes("items-center gap-2 mb-1"):
                             ui.badge(f"#{r.rank}", color="primary")
                             ui.label(g.name).classes("text-sm")
-                            ui.badge(f"{r.similarity_score:.3f}", color=conf_color)
+                            ui.badge(f"{r.similarity_score:.3f}", color=conf_color, text_color="black")
 
             ui.button("Re-match", on_click=run_whatif).classes("mt-2")
 
