@@ -1,4 +1,4 @@
-# Core NLP & ML
+# Core ML
 sentence-transformers
 transformers
 torch
@@ -8,11 +8,9 @@ scikit-learn
 numpy
 pandas
 
-# Knowledge Graph
 networkx
 pyvis
 
-# XAI
 shap
 lime
 
@@ -21,8 +19,7 @@ matplotlib
 seaborn
 plotly
 
-# Web App
-streamlit
+nicegui
 
 # Text Processing
 nltk
